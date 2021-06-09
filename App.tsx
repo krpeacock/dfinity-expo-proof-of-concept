@@ -1,12 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
-import { Actor, HttpAgent } from '@dfinity/agent';
-import { idlFactory as counter_idl, canisterId as counter_id } from './generated';
-import type {_SERVICE} from './generated/counter.did';
+import { idlFactory as counter_idl, canisterId as counter_id } from './.dfx/local/canisters/counter/counter.js';
+import {Actor, HttpAgent} from '@dfinity/agent'
 
-const agent = new HttpAgent();
-const counter = Actor.createActor<_SERVICE>(counter_idl, { agent, canisterId: counter_id });
+
+const agent = new HttpAgent({host: "http://localhost:8000"});
+agent.fetchRootKey();
+const counter = Actor.createActor(counter_idl, { agent, canisterId: counter_id });
 
 export default function App() {
   const [count, setCount] = useState(0);
