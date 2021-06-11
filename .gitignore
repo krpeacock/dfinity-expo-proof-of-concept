@@ -12,5 +12,7 @@ web-build/
 # macOS
 .DS_Store
 
-.dfx
-!.dfx/local
+.dfx/replica-configuration
+.dfx/state
+.dfx/pid
+.dfx/webserver-port
